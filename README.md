@@ -7,13 +7,12 @@ This is heavily inspired by :
 - the [vscode-kickassembler](https://github.com/tomconte/vscode-kickassembler), made by [Thomas Conté](https://github.com/tomconte),
 - the [vscode-kickass-c64](https://github.com/CaptainJiNX/vscode-kickass-c64), made by [Captain JiNX](https://github.com/CaptainJiNX/).
 Thanks to all of you !
-Thanks also to [JimJimPlays and his Youtube Channel](https://www.youtube.com/channel/UCVxS1_x-Ygd7O9Z-d0Kjk0A) and his "Beginning Assembly" tutorials.
 
-And finally thanks to [The 8-bit guy](http://www.the8bitguy.com) for his [Commander X16](https://www.commanderx16.com) "Dream computer" project.
+Thanks also to [JimJimPlays and his Youtube Channel](https://www.youtube.com/channel/UCVxS1_x-Ygd7O9Z-d0Kjk0A) and his "Beginning Assembly" tutorials. And finally thanks to [The 8-bit guy](http://www.the8bitguy.com) for his [Commander X16](https://www.commanderx16.com) "Dream computer" project.
 His videos and his "neo-retro" computer project brought me back to the Commodore world of my childhood and the unfulfilled, until today, curiousity in how it worked behind the scenes.
 
 Actually, my programming skills are pretty weak... 
-I started to learn 6502 C64 and X16 assemby summer 2020, discovered and liked the features of Kick Assembler and looked for an IDE. That lead me to Visual Studio Code and the Kick Assembler extensions. I wanted to adapt these to use the Commander X16 emulator but with no knowledge in JavaScript, Node.js, github, and how to build a VSCode extension that was pretty harsh. 
+I started to learn 6502 C64 and X16 assemby summer 2020, discovered and liked the features of Kick Assembler and looked for an IDE. That lead me to Visual Studio Code and the Kick Assembler extensions. I wanted to adapt these to use the Commander X16 emulator but with no knowledge in JavaScript, Node.js, github, and how to build a VSCode extension this was pretty harsh. 
 Hence I took a step by step and trial & error approach that brought me to these results after a few nights.
 There is certainly way for improvement ! Comments & feedback are welcome.
 
