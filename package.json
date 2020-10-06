@@ -7,6 +7,11 @@
 	"license": "MIT",
 	"author": {"name": "Niko Vanraes", "email": "niko.vanraes@gmail.com"},
 	"repository": {"url": "https://github.com/Vrokin/x16-KickAss"},
+	"icon": "images/icon.png",
+	"galleryBanner": {
+		"color": "#0000AA",
+		"theme": "dark"
+	},
 	"engines": {
 		"vscode": "^1.49.0"
 	},
@@ -109,11 +114,7 @@
 			}
 		]
 	},
-	"icon": "https://github.com/Vrokin/x16-KickAss/blob/master/images/icon.png",
-	"galleryBanner": {
-		"color": "#0000AA",
-		"theme": "dark"
-	},
+
 	"scripts": {
 		"lint": "eslint .",
 		"pretest": "npm run lint",
