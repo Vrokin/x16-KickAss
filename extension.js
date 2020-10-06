@@ -19,6 +19,8 @@ function activate(context) {
 		runPrg(buildPrg()); // Build then run 
 	});
 
+	
+
 	context.subscriptions.push(commandBuild);
 	context.subscriptions.push(commandRun);
 }
@@ -36,6 +38,12 @@ This function will build a .prg file from the assembler source with Kick Assembl
 */
 function buildPrg() {
 
+	let outDir = "bin";
+	let fileToCompile = vscode.window.activeTextEditor.document.fileName;
+	let prg = path.basename(fileToCompile).replace(path.extname(fileToCompile), ".prg");
+	let workDir = path.dirname(fileToCompile);
+	let outputDir = path.join(workDir, outDir);
+	let prgFile = path.join(outputDir, prg);
 	// Get settings from user configuration and check if they are correctly defined
 	let java = configuration.get("java");
 	let kickAssJar = configuration.get("kickAssJar");
@@ -56,37 +64,39 @@ function buildPrg() {
 		}
 	})
 
-	// Set variables for Kick Assembler
-	let outDir = "bin";
-	let fileToCompile = vscode.window.activeTextEditor.document.fileName;
-	let prg = path.basename(fileToCompile).replace(path.extname(fileToCompile), ".prg");
-	let workDir = path.dirname(fileToCompile);
-	let outputDir = path.join(workDir, outDir);
-	let prgFile = path.join(outputDir, prg);
-
-	vscode.window.showInformationMessage("Building Commander X16 .Prg file");
-
 	outputChannel.clear;
+	outputChannel.show(0);
 
-	// Information messages
-	outputChannel.appendLine("> JavaVM set to : " + java);
-	outputChannel.appendLine("> Kick Assembler set to: " + kickAssJar);
-	outputChannel.appendLine("> Building " + fileToCompile);
+	//Check if File to Compile is a file with one of the assembler extensions
+	const assemblerExtensions = [".asm",".a",".s",".lib",".inc"];
+	if (assemblerExtensions.includes(path.extname(fileToCompile))) {
+		outputChannel.appendLine("Building:" + fileToCompile);
+	} else { // if not, stop the build
+		outputChannel.appendLine("The file to compile does not appear to be an assembler file. Build process exited!");
+		return;
+	}
 
 	// Create Bin Directory in working directory if it does not exist yet
 	if (!fs.existsSync(outputDir)) {
 		fs.mkdirSync(outputDir);
 	}
+	// delete files in the bin directory
 	fs.readdirSync(outputDir).map((file) => fs.unlinkSync(path.join(outputDir, file)));
 
-	// Run Kick Assembler with arguments
-	// The process is launched in syncrone mode, as the .prg file has to be build before launching the emulator
-	const args = ["-jar", kickAssJar, "-debug", "-showmem", "-maxAddr", "131072", "-odir", outputDir, fileToCompile];
+	// Run Kick Assembler with arguments, t
+	const args = ["-jar", kickAssJar, "-debug", "-bytedump", "-symbolfile", "-symbolfiledir", outputDir, "-showmem", "-maxAddr", "131072", "-odir", outputDir, fileToCompile];
+
+	//display the the command that will be executed in the output window
+	outputChannel.append(java + " ");
+	args.forEach(function (a) {
+		outputChannel.append(a + " ");
+	});
+
+	// Execute Kick Assembler. The process is launched in syncrone mode as the .prg file has to be build before launching the emulator
 	let runjava = cp.spawnSync(java, args);
 
 	outputChannel.appendLine(runjava.stdout.toString());
-	outputChannel.appendLine("=> Source file " + path.basename(fileToCompile) + " has been compiled to " + path.basename(prgFile));
-	outputChannel.show(0);
+	outputChannel.appendLine("> Source file " + path.basename(fileToCompile) + " has been compiled to " + path.basename(prgFile));
 
 	// The Build() funtion returns the build .prg file
 	return prgFile;
@@ -111,13 +121,13 @@ function runPrg(prgFile) {
 		}
 	})
 
-	// Optional Commander X16 configuration
+	// Optional Commander X16 arguments
 	let x16emuKeymap = configuration.get("x16emulatorKeymap");
 	let x16emuScale = configuration.get("x16emulatorScale");
 	let x16emuDebug = configuration.get("x16emulatorDebug");
 	let x16emuRunPrg = configuration.get("x16emulatorRunPrg");
 
-	// Launch Commander X16 emulator with arguments
+	// If optional arguments are defined, add them to the arguments list
 	let args = ["-keymap", x16emuKeymap, "-scale", x16emuScale, "-prg", prgFile];
 	if (x16emuDebug) {
 		args.push("-debug");
@@ -125,10 +135,17 @@ function runPrg(prgFile) {
 	if (x16emuRunPrg) {
 		args.push("-run");
 	}
+
+	// Display the command that will be executed 
+	outputChannel.appendLine("X16 emulator starting with PRG file " + prgFile + ":");
+	outputChannel.append(x16emulator + " ");
+	args.forEach(function (a) {
+		outputChannel.append(a + " ");
+	});
+
+	// start the emulator
 	let runX16emulator = cp.spawn(x16emulator, args, { cwd: prgFile.dirname, detached: true });
 
-	// Information messages
-	vscode.window.showInformationMessage("Commander X16 emulator started.")
-	outputChannel.appendLine("=> X16 emulator starting with PRG file " + prgFile);
+	outputChannel.appendLine(runX16emulator.stdout.toString());
 	outputChannel.show(0);
 }
