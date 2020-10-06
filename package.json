@@ -3,7 +3,10 @@
 	"displayName": "x16-KickAss",
 	"description": "Commander X16 Kick Assembler VSCode Extension",
 	"version": "1.0.0",
+	"publisher": "Vrokin",
 	"license": "MIT",
+	"author": {"name": "Niko Vanraes", "email": "niko.vanraes@gmail.com"},
+	"repository": {"url": "https://github.com/Vrokin/x16-KickAss"},
 	"engines": {
 		"vscode": "^1.49.0"
 	},
