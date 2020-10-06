@@ -106,7 +106,7 @@
 			}
 		]
 	},
-	"icon": "images/icon.png",
+	"icon": "https://github.com/Vrokin/x16-KickAss/blob/master/images/icon.png",
 	"galleryBanner": {
 		"color": "#0000AA",
 		"theme": "dark"

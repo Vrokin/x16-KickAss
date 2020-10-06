@@ -19,8 +19,6 @@ function activate(context) {
 		runPrg(buildPrg()); // Build then run 
 	});
 
-	
-
 	context.subscriptions.push(commandBuild);
 	context.subscriptions.push(commandRun);
 }
