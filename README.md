@@ -31,8 +31,8 @@ There is certainly way for improvement ! Comments & feedback are welcome.
 ## Requirements
 
 - Java runtime (to be able to run KickAss.jar)
-- [Download Kick Assembler](http://www.theweb.dk/KickAssembler/KickAssembler.zip) and extract it to a nice place
-- [Download Commander X16](https://www.commanderx16.com/forum/index.php?/files/file/25-commander-x16-emulator-winmaclinux/)
+- [Download Kick Assembler](http://www.theweb.dk/KickAssembler/KickAssembler.zip) and extract it to a nice place.
+- [Download Commander X16](https://www.commanderx16.com/forum/index.php?/files/file/25-commander-x16-emulator-winmaclinux/) and install it to a location of your choice.
 
 ## Extension Settings
 
@@ -42,7 +42,7 @@ This extension contributes the following settings:
 - `x16-kickAss.x16emulator` : Full path to Commander X16 emulator
 - `x16-kickAss.keymap` : define  a specific keyboard layout for the emulator
 - `x16-kickAss.scale` : scales the video output tof the emulator
-- `x16-kickAss.runprg` : run the loaded program at emulator start
+- `x16-kickAss.runprg` : exectute the build program at emulator start
 - `x16-kickAss.debug` : enable the emulator debug function 
 
 ## Known Issues
@@ -59,5 +59,8 @@ This extension contributes the following settings:
 ### 1.0.0
 
 Initial release of X16-KickAss
+
+### 1.0.1
+
 
 **Enjoy!**

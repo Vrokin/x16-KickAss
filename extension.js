@@ -126,7 +126,11 @@ function runPrg(prgFile) {
 	let x16emuRunPrg = configuration.get("x16emulatorRunPrg");
 
 	// If optional arguments are defined, add them to the arguments list
-	let args = ["-keymap", x16emuKeymap, "-scale", x16emuScale, "-prg", prgFile];
+	let args = ["-scale", x16emuScale, "-prg", prgFile];
+	if (x16emuKeymap) {
+		args.push("-keymap");
+		args.push(x16emuKeymap);
+	}
 	if (x16emuDebug) {
 		args.push("-debug");
 	}

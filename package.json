@@ -79,8 +79,8 @@
 				},
 				"x16-kickAss.x16emulatorKeymap": {
 					"type": "string",
-					"default": "fr-be",
-					"description": "Commander X16 : switch to a specific keyboard layout"
+					"default": "",
+					"description": "Commander X16 : switch to a specific keyboard layout, leave blank for default."
 				},
 				"x16-kickAss.x16emulatorScale": {
 					"type": "string",
@@ -95,7 +95,7 @@
 				"x16-kickAss.x16emulatorRunPrg": {
 					"type": "boolean",
 					"default": "true",
-					"description": "Commander X16 Run program after emulator start"
+					"description": "Commander X16 : execute build program after emulator start"
 				}
 			}
 		},
