@@ -62,5 +62,7 @@ Initial release of X16-KickAss
 
 ### 1.0.1
 
+Left keymap settings blank by default to use standard QWERTY keyboard layout and only use the Commander X16 emulator -keymap parameter when provided.
+
 
 **Enjoy!**

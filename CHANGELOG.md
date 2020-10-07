@@ -12,5 +12,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Commander X16 emululator with some options : -debug, -scale, -run, -keymap
 - Language support files
 
+## [1.0.1]
+
+Left keymap settings blank by default to use standard QWERTY keyboard layout and only use the Commander X16 emulator -keymap parameter when provided.
+
 ### Added
 
