@@ -40,9 +40,9 @@ This extension contributes the following settings:
 - `x16-kickAss.kickAssJar`: Full path to KickAss.jar
 - `x16-kickAss.java`: Full path to Java Virtual Machine binary
 - `x16-kickAss.x16emulator` : Full path to Commander X16 emulator
-- `x16-kickAss.keymap` : define  a specific keyboard layout for the emulator
-- `x16-kickAss.scale` : scales the video output tof the emulator
-- `x16-kickAss.runprg` : exectute the build program at emulator start
+- `x16-kickAss.keymap` : define  a specific keyboard layout for the emulator (leave blank for default)
+- `x16-kickAss.scale` : scales the video output of the emulator
+- `x16-kickAss.runprg` : execute the build program at emulator start
 - `x16-kickAss.debug` : enable the emulator debug function 
 
 ## Known Issues
