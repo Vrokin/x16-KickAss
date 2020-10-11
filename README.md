@@ -56,13 +56,16 @@ This extension contributes the following settings:
 
 ## Release Notes
 
-### 1.0.0
+### 1.0.2
 
-Initial release of X16-KickAss
+Better management of errors in extension settings.
 
 ### 1.0.1
 
 Left keymap settings blank by default to use standard QWERTY keyboard layout and only use the Commander X16 emulator -keymap parameter when provided.
 
+### 1.0.0
+
+Initial release of X16-KickAss
 
 **Enjoy!**

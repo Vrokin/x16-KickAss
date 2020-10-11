@@ -45,28 +45,32 @@ function buildPrg() {
 	// Get settings from user configuration and check if they are correctly defined
 	let java = configuration.get("java");
 	let kickAssJar = configuration.get("kickAssJar");
-	if (java == "") {
-		vscode.window.showErrorMessage("JavaVM not defined! Set x16-kickAss.java in Extension Settings.");
-		return;
-	}
-
-	if (kickAssJar == "") {
-		vscode.window.showErrorMessage("Kick Assembler JAR path not defined! Set x16-kickAss.kickAssJar in Extension Settings.");
-		return;
-	}
-
-	fs.stat(kickAssJar, function (err, stat) {
-		if (err.code == "ENOENT") {
-			vscode.window.showErrorMessage("Kick Assembler JAR not correctly defined! Set x16-kickAss.kickAssJar in Extension Settings.");
-			return;
-		}
-	})
 
 	outputChannel.clear;
 	outputChannel.show(0);
 
+	if (java == "") {
+		vscode.window.showErrorMessage("JavaVM not defined!");
+		outputChannel.appendLine("JavaVM not defined! Set x16-kickAss.java in Extension Settings.");
+		return;
+	}
+
+	if (kickAssJar == "") {
+		vscode.window.showErrorMessage("Kick Assembler JAR path not defined!");
+		outputChannel.appendLine("Kick Assembler JAR path not defined! Set x16-kickAss.kickAssJar in Extension Settings.");
+		return;
+	}
+
+	if (fs.existsSync(kickAssJar)) {
+		//file exists
+	} else {
+		vscode.window.showErrorMessage("KickAss JAR file not correct.");
+		outputChannel.appendLine("Incorrect KickAssembler Jar:" + kickAssJar + "! Check x16-kickAss.kickAssJar in Extension Settings.");
+		return;
+	}
+
 	//Check if File to Compile is a file with one of the assembler extensions
-	const assemblerExtensions = [".asm",".a",".s",".lib",".inc"];
+	const assemblerExtensions = [".asm", ".a", ".s", ".lib", ".inc"];
 	if (assemblerExtensions.includes(path.extname(fileToCompile))) {
 		outputChannel.appendLine("Building:" + fileToCompile);
 	} else { // if not, stop the build
@@ -92,7 +96,6 @@ function buildPrg() {
 
 	// Execute Kick Assembler. The process is launched in syncrone mode as the .prg file has to be build before launching the emulator
 	let runjava = cp.spawnSync(java, args);
-
 	outputChannel.appendLine(runjava.stdout.toString());
 	outputChannel.appendLine("> Source file " + path.basename(fileToCompile) + " has been compiled to " + path.basename(prgFile));
 
@@ -106,18 +109,25 @@ This function runs the Commander X16 emulator with the .prg file build by Kick A
 */
 function runPrg(prgFile) {
 
+	if (!prgFile) {		//if prgFile is not defined, do not execute this function
+		outputChannel.appendLine("No .prg file. Emulator start aborded.");
+		return;
+	}
+
 	// Get settings from user configuration and check if they are defined
 	let x16emulator = configuration.get('x16emulator');
 	if (x16emulator == "") {
 		vscode.window.showErrorMessage('Commander X16 emulator not defined! Set x16-kickAss.x16emulator in Extension Settings.');
+		outputChannel.appendLine("Commander X16 emulator not defined! Check x16-kickAss.x16emulator in Extension Settings.");
 		return;
 	}
-	fs.stat(x16emulator, function (err, stat) {
-		if (err.code == "ENOENT") {
-			vscode.window.showErrorMessage("Kick Assembler JAR not correctly defined! Set x16-kickAss.kickAssJar in Extension Settings.");
-			return;
-		}
-	})
+	if (fs.existsSync(x16emulator)) {
+		//file exists
+	} else {
+		vscode.window.showErrorMessage("Commander X16 emulator not correctly defined.");
+		outputChannel.appendLine("Commander X16 emulator not correctly defined:" + x16emulator + "! Check x16-kickAss.x16emulator in Extension Settings.");
+		return;
+	}
 
 	// Optional Commander X16 arguments
 	let x16emuKeymap = configuration.get("x16emulatorKeymap");

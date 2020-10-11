@@ -79,7 +79,7 @@
 				},
 				"x16-kickAss.x16emulator": {
 					"type": "string",
-					"default": "/Applications/x16emu_mac/x16emu",
+					"default": "",
 					"description": "Full path to Commander X16 emulator"
 				},
 				"x16-kickAss.x16emulatorKeymap": {
@@ -95,7 +95,7 @@
 				"x16-kickAss.x16emulatorDebug": {
 					"type": "boolean",
 					"default": "true",
-					"description": "Commander X16 : ennables the debbuger (enable with [F12] in emulator, disable with [F5]."
+					"description": "Commander X16 : ennables the debbuger (enable with [F12] in emulator, disable with [F5])."
 				},
 				"x16-kickAss.x16emulatorRunPrg": {
 					"type": "boolean",
