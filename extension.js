@@ -72,7 +72,7 @@ function buildPrg() {
 	//Check if File to Compile is a file with one of the assembler extensions
 	const assemblerExtensions = [".asm", ".a", ".s", ".lib", ".inc"];
 	if (assemblerExtensions.includes(path.extname(fileToCompile))) {
-		outputChannel.appendLine("Building:" + fileToCompile);
+		outputChannel.appendLine("Compiling " + fileToCompile);
 	} else { // if not, stop the build
 		outputChannel.appendLine("The file to compile does not appear to be an assembler file. Build process exited!");
 		return;
@@ -85,10 +85,10 @@ function buildPrg() {
 	// delete files in the bin directory
 	fs.readdirSync(outputDir).map((file) => fs.unlinkSync(path.join(outputDir, file)));
 
-	// Run Kick Assembler with arguments, t
+	//  Kick Assembler with arguments
 	const args = ["-jar", kickAssJar, "-debug", "-bytedump", "-symbolfile", "-symbolfiledir", outputDir, "-showmem", "-maxAddr", "131072", "-odir", outputDir, fileToCompile];
 
-	//display the the command that will be executed in the output window
+	//display the executed command in the output window
 	outputChannel.append(java + " ");
 	args.forEach(function (a) {
 		outputChannel.append(a + " ");
@@ -109,6 +109,8 @@ This function runs the Commander X16 emulator with the .prg file build by Kick A
 */
 function runPrg(prgFile) {
 
+	outputChannel.appendLine("X16 emulator starting :");
+
 	if (!prgFile) {		//if prgFile is not defined, do not execute this function
 		outputChannel.appendLine("No .prg file. Emulator start aborded.");
 		return;
@@ -117,23 +119,32 @@ function runPrg(prgFile) {
 	// Get settings from user configuration and check if they are defined
 	let x16emulator = configuration.get('x16emulator');
 	if (x16emulator == "") {
-		vscode.window.showErrorMessage('Commander X16 emulator not defined! Set x16-kickAss.x16emulator in Extension Settings.');
+		vscode.window.showErrorMessage('Commander X16 emulator error.');
 		outputChannel.appendLine("Commander X16 emulator not defined! Check x16-kickAss.x16emulator in Extension Settings.");
 		return;
 	}
 	if (fs.existsSync(x16emulator)) {
 		//file exists
 	} else {
-		vscode.window.showErrorMessage("Commander X16 emulator not correctly defined.");
+		vscode.window.showErrorMessage("Commander X16 emulator error.");
 		outputChannel.appendLine("Commander X16 emulator not correctly defined:" + x16emulator + "! Check x16-kickAss.x16emulator in Extension Settings.");
 		return;
 	}
 
-	// Optional Commander X16 arguments
 	let x16emuKeymap = configuration.get("x16emulatorKeymap");
 	let x16emuScale = configuration.get("x16emulatorScale");
 	let x16emuDebug = configuration.get("x16emulatorDebug");
 	let x16emuRunPrg = configuration.get("x16emulatorRunPrg");
+	let x16emuWarp = configuration.get("x16emulatorWarp");
+	let x16emuSDCard = configuration.get("x16emulatorSDCard");
+
+	if (fs.existsSync(x16emuSDCard)) {
+		//file exists
+	} else {
+		vscode.window.showErrorMessage("Commander X16 emulator error.");
+		outputChannel.appendLine("Commander X16 sdcard path not correctly defined: " + x16emuSDCard + "! Check x16-kickAss.x16emulatorSDCard in Extension Settings.");
+		return;
+	}
 
 	// If optional arguments are defined, add them to the arguments list
 	let args = ["-scale", x16emuScale, "-prg", prgFile];
@@ -147,17 +158,40 @@ function runPrg(prgFile) {
 	if (x16emuRunPrg) {
 		args.push("-run");
 	}
+	if (x16emuSDCard) {
+		args.push("-sdcard");
+		args.push(x16emuSDCard);
+	}
+	if (x16emuWarp) {
+		args.push("-warp");
+	}
 
 	// Display the command that will be executed 
-	outputChannel.appendLine("X16 emulator starting with PRG file " + prgFile + ":");
+
 	outputChannel.append(x16emulator + " ");
 	args.forEach(function (a) {
 		outputChannel.append(a + " ");
 	});
 
 	// start the emulator
-	let runX16emulator = cp.spawn(x16emulator, args, { cwd: prgFile.dirname, detached: true });
+	//let runX16emulator = cp.spawn(x16emulator, args, { cwd: prgFile.dirname, detached: true, stdio: "inherit", shell: true });
+	let runX16emulator = cp.spawn(x16emulator, args, { cwd: prgFile.dirname, detached: true});
 
-	outputChannel.appendLine(runX16emulator.stdout.toString());
-	outputChannel.show(0);
+	runX16emulator.stdout.on("data", (data) => {
+		outputChannel.appendLine("\nx16emulator output: \n" + data);
+	});
+
+	runX16emulator.stderr.on("data", (data) => {
+		outputChannel.appendLine("\nx16emulator error output: \n" + data);
+	});
+
+	runX16emulator.on("error", (error) => {
+		outputChannel.appendLine("\nx16emulator error: \n" + error);
+	});
+
+	runX16emulator.stderr.on("close", function () {
+		outputChannel.appendLine("\nx16emulator halted.\n");
+	});
+
+	return;
 }

@@ -11,22 +11,19 @@ Thanks to all of you !
 Thanks also to [JimJimPlays and his Youtube Channel](https://www.youtube.com/channel/UCVxS1_x-Ygd7O9Z-d0Kjk0A) and his "Beginning Assembly" tutorials. And finally thanks to [The 8-bit guy](http://www.the8bitguy.com) for his [Commander X16](https://www.commanderx16.com) "Dream computer" project.
 His videos and his "neo-retro" computer project brought me back to the Commodore world of my childhood and the unfulfilled, until today, curiousity in how it worked behind the scenes.
 
-Actually, my programming skills are pretty weak... 
-I started to learn 6502 C64 and X16 assemby summer 2020, discovered and liked the features of Kick Assembler and looked for an IDE. That lead me to Visual Studio Code and the Kick Assembler extensions. I wanted to adapt these to use the Commander X16 emulator but with no knowledge in JavaScript, Node.js, github, and how to build a VSCode extension this was pretty harsh. 
-Hence I took a step by step and trial & error approach that brought me to these results after a few nights.
-There is certainly way for improvement ! Comments & feedback are welcome.
+Actually, my programming skills are pretty weak... (but improving now :) )
+I started to learn 6502 C64 and X16 assemby summer 2020, discovered and liked the features of Kick Assembler and looked for an IDE. That lead me to Visual Studio Code and the Kick Assembler extensions. I wanted to adapt these to use the Commander X16 emulator but with no knowledge in JavaScript, Node.js, github, etc. and how to build a VSCode extension this was pretty harsh. 
+Hence I took a step by step learning with lots of trials & errors that brought me to these results after a few nights.
+The code can probably be improved and might look quite "BASIC" ;) and not in line with the best javascript & node.js guru standards. but at least I think it is easly understandable if you are also new into this. ... And moreover, it works ! (Isn't that the most important thing ?).
+Comments & feedback are welcome!
+Also, if you would like some options or features, let me know. 
 
 ## Features
 
 - language configuration/syntax coloring,
 - build and build & run commands,
-- support for [Commander X16 Emulator](https://github.com/commanderx16/x16-emulator),
+- support for [Commander X16 Emulator](https://github.com/commanderx16/x16-emulator) with most usefull options (to me at least). Tested with r38 (Kyoto).
 - outputs all build artifacts into a `bin/` folder that will be created in the same folder as the currently opened file.
-
-** Roadmap **
-- add more Commander X16 emulator options,
-- manage child process messages & errors,
-- add more advanced debuging features.
 
 ## Requirements
 
@@ -40,32 +37,40 @@ This extension contributes the following settings:
 - `x16-kickAss.kickAssJar`: Full path to KickAss.jar
 - `x16-kickAss.java`: Full path to Java Virtual Machine binary
 - `x16-kickAss.x16emulator` : Full path to Commander X16 emulator
-- `x16-kickAss.keymap` : define  a specific keyboard layout for the emulator (leave blank for default)
-- `x16-kickAss.scale` : scales the video output of the emulator
-- `x16-kickAss.runprg` : execute the build program at emulator start
-- `x16-kickAss.debug` : enable the emulator debug function 
+- Check [here] (https://github.com/commanderx16/x16-emulator/blob/master/README.md) for more information on the emulator options below.
+- `x16-kickAss.x16emulatorKeymap` : define  a specific keyboard layout for the emulator (optional, leave blank for default)
+- `x16-kickAss.x16emulatorScale` : scales the video output of the emulator (optional)
+- `x16-kickAss.x16emulatorRunPrg` : execute the build program at emulator start (on/off)
+- `x16-kickAss.x16emulatorDebug` : enable the emulator debug function (on/off)
+- `x16-kickAss.x16emulatorSDCard` : lets you specify and SD Card image that will be mounted at emulator start (optional)
+- `x16-kickAss.x16emulatorWarp` : run the emulator as fast as possible (on/off)
 
 ## Known Issues
 
 ## How to contribute
+The code is Open Source and aviable on GitHub.
 
 ### Prerequisites
 
-- [Visual Studio Code](https://code.visualstudio.com/) (with `esbenp.prettier-vscode`, `dbaeumer.vscode-eslint` extensions installed)
-- [nvm](https://github.com/creationix/nvm) (download and install)
-
 ## Release Notes
 
-### 1.0.2
+### [1.1]
+- Added '-SDCard' option in the extensions settings for the Commander X16 emulator.
+- Added '-Warp' option in the extensions settings for the Commander X16 emulator.
+- Better management of the Commander X16 emulator outputs.
 
-Better management of errors in extension settings.
+### [1.0.2]
 
-### 1.0.1
+- Better management of errors in extension settings.
 
-Left keymap settings blank by default to use standard QWERTY keyboard layout and only use the Commander X16 emulator -keymap parameter when provided.
+### [1.0.1]
 
-### 1.0.0
+- Left keymap settings blank by default to use default keyboard layout and only use the Commander X16 emulator -keymap parameter when provided.
 
-Initial release of X16-KickAss
+### [1.0.0]
+
+- Build, Build & Run Commands.
+- Commander X16 emululator with some options : -debug, -scale, -run, -keymap.
+- Language support files.
 
 **Enjoy!**

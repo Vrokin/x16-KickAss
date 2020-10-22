@@ -85,12 +85,17 @@
 				"x16-kickAss.x16emulatorKeymap": {
 					"type": "string",
 					"default": "",
-					"description": "Commander X16 : switch to a specific keyboard layout, leave blank for default."
+					"description": "Commander X16 : switch to a specific keyboard layout. Optional: leave blank for default."
+				},
+				"x16-kickAss.x16emulatorSDCard": {
+					"type": "string",
+					"default": "",
+					"description": "Commander X16 : lets you specify and SD Card image (partition table + FAT32) that will be mounted at emulator start (Optional)."
 				},
 				"x16-kickAss.x16emulatorScale": {
 					"type": "string",
 					"default": "2",
-					"description": "Commander X16 : scales video output to an integer multiple of 640x480"
+					"description": "Commander X16 : scales video output to an integer multiple of 640x480."
 				},
 				"x16-kickAss.x16emulatorDebug": {
 					"type": "boolean",
@@ -100,7 +105,12 @@
 				"x16-kickAss.x16emulatorRunPrg": {
 					"type": "boolean",
 					"default": "true",
-					"description": "Commander X16 : execute build program after emulator start"
+					"description": "Commander X16 : execute build program after emulator start."
+				},
+				"x16-kickAss.x16emulatorWarp": {
+					"type": "boolean",
+					"default": "false",
+					"description": "Commander X16 : causes the emulator to run as fast as possible, possibly faster than a real X16."
 				}
 			}
 		},

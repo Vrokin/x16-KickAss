@@ -1,0 +1,19 @@
+parsing
+Got 24 errors while executing:
+  (/Users/niko/Programming/x16-kickass/extension.js 12:28) Syntax error
+  (/Users/niko/Programming/x16-kickass/extension.js 26:8) Syntax error
+  (/Users/niko/Programming/x16-kickass/extension.js 27:23) Syntax error
+  (/Users/niko/Programming/x16-kickass/extension.js 29:7) Syntax error
+  (/Users/niko/Programming/x16-kickass/extension.js 37:21) Syntax error
+  ...
+
+/**
+ * @param {vscode.ExtensionContext} context
+ */
+function activate(context) {
+                           ^
+
+Error: Syntax error
+at line 12, column 28 in extension.js
+
+
