@@ -4,9 +4,10 @@ All notable changes to the "x16-kickass" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [1.1]
+## [1.1.0]
 - Added '-SDCard' option in the extensions settings for the Commander X16 emulator.
 - Added '-Warp' option in the extensions settings for the Commander X16 emulator.
+- Better management of the Commander X16 emulator outputs.
 
 ### [1.0.2]
 

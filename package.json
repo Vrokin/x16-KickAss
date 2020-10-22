@@ -2,7 +2,7 @@
 	"name": "x16-kickass",
 	"displayName": "x16-KickAss",
 	"description": "Commander X16 Kick Assembler VSCode Extension",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"publisher": "Vrokin",
 	"license": "MIT",
 	"author": {

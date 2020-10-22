@@ -54,7 +54,7 @@ The code is Open Source and aviable on GitHub.
 
 ## Release Notes
 
-### [1.1]
+### [1.1.0
 - Added '-SDCard' option in the extensions settings for the Commander X16 emulator.
 - Added '-Warp' option in the extensions settings for the Commander X16 emulator.
 - Better management of the Commander X16 emulator outputs.
